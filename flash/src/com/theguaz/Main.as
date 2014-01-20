@@ -1,0 +1,9 @@
+﻿package com.theguaz{	import flash.display.*;	import flash.events.*;	import flash.net.*;	import flash.utils.*	import com.bit101.components.PushButton;	public class Main extends MovieClip {		private var _serverSocket:ServerSocket;		private var incomingSocket		private var _pushShoot:PushButton;		private var _myTime:Timer;
+				public function Main() {			setButtons()		}				private function setButtons () {			_pushShoot = new PushButton(this,0,0,"CREATE SOCKET",onPushButtonEventHandler);			_pushShoot.x = 31			_pushShoot.y = 30		}				private function onPushButtonEventHandler(e:Event) {			var vui:PushButton = e.currentTarget as PushButton;			switch (vui) {				case _pushShoot :					createServer()					_pushShoot.visible = false
+					if(_serverSocket){
+						
+					}				break;			}		}		//creation of a TCP/IP Socket server		private function createServer():void {
+			_myTime = new Timer(1500);			trace("creating socket :)")			_serverSocket = new ServerSocket();			_serverSocket.addEventListener(Event.CONNECT, onDataConnect);			_serverSocket.bind(7934);			_serverSocket.listen();
+					}						protected function onDataConnect(event:ServerSocketConnectEvent):void {			trace("Socket creado")			incomingSocket = event.socket;			incomingSocket.addEventListener(ProgressEvent.SOCKET_DATA, onSocketData);		}		protected function onSocketData(event:ProgressEvent):void {			if (incomingSocket.bytesAvailable > 0){				/*texto_txt.htmlText = ""                 var obj:Array = String(incomingSocket.readUTF()).split("|");				 texto_txt.htmlText = String(obj[0] + "-" + obj[1]);                 dot_mc.x = Number(obj[0]); dot_mc.y = Number(obj[1]);          	*/
+			trace(incomingSocket.readBytes)	
+			}		}		/////////// END OF CLASS	}}
